@@ -22,4 +22,24 @@ def index():
     sectionTemplate = "./templates/home.tpl"
     return template("./pages/index.html", version=utils.getVersion(), sectionTemplate=sectionTemplate, sectionData = {})
 
-run(host='0.0.0.0', port=os.environ.get('PORT', 5000))
+@route('/browse')
+def browse():
+    sectionTemplate = "./templates/browse.tpl"
+    return template("./pages/index.html", version=utils.getVersion(), sectionTemplate=sectionTemplate, sectionData = {})
+@route('/search')
+def search():
+    sectionTemplate = "./templates/search.tpl"
+    print("called")
+    return template("./pages/index.html", version=utils.getVersion(), sectionTemplate=sectionTemplate, sectionData = {})
+
+for show in utils.AVAILABE_SHOWS:
+    print(('/show/{0}'.format(show)))
+    @route('/show/{0}'.format(show))
+    def shows():
+        sectionTemplate = "./templates/show.tpl"
+        return template("./pages/index.html", version=utils.getVersion(), sectionTemplate=sectionTemplate, sectionData = {})
+
+
+
+
+run(host='localhost', port=os.environ.get('PORT', 5000))
